@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import "dotenv/config";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: true });
-const adapter = new PrismaPg(pool as any);
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
