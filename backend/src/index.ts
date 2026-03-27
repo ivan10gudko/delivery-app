@@ -1,4 +1,5 @@
 import express from 'express';
+import { errorHandler } from './middleware/error.middleware';
 
 const app = express()
 const port = 3000
@@ -10,3 +11,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
+app.use(errorHandler);
