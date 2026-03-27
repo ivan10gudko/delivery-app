@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/src/index.js",
+    "seed": "ts-node prisma/seed.ts",
     "build": "prisma generate && tsc",
-    "postinstall": "prisma generate",
-    "seed": "ts-node prisma/seed.ts"
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,13 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/node": "^24.14.0",
+    "@types/node": "^25.5.0",
     "@types/pg": "^8.20.0",
     "prisma": "^7.5.0",
     "ts-node": "^10.9.2",
