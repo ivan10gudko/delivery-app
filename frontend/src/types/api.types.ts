@@ -15,11 +15,14 @@ export interface ShopParams {
 export type SortOrder = 'asc' | 'desc';
 export type SortBy = 'name'|'price';
 
-export interface InfiniteProductsParams {
-    pageParam?: number;
+export interface ProductFilter{
     shopId: number;
     categoryId?: number;
     sortBy?: SortBy;
     order?: SortOrder;
+}
+
+export interface InfiniteProductsParams extends ProductFilter{
+    pageParam?: number;
     limit?: number;
 }

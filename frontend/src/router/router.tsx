@@ -1,3 +1,4 @@
+import { FilterProvider } from "@/context/FilterContext";
 import MainLayout from "@/layouts/MainLayout";
 import Cart from "@/pages/Cart";
 import Coupons from "@/pages/Coupons";
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
             { index: true, element: <Navigate to="/shop" replace /> },
-            {path:"shop", element: <Shop />},
+            {path:"shop", element: <FilterProvider><Shop /></FilterProvider>},
             {path:"cart", element: <Cart />},
             {path:"history", element: <History />},
             {path:"coupons", element: <Coupons />}
