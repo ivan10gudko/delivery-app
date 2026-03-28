@@ -23,6 +23,13 @@ export const apiService = {
         const { data } = await apiClient.get('/coupons');
         return data;
     },
+    
+    validateCoupon: async (code: string) => {
+        const { data } = await apiClient.get<Coupon>('/coupons/validate', {
+            params: { code }
+        });
+        return data;
+    },
 
     getProductsInfinite: async ({
         pageParam = 1,
@@ -53,13 +60,6 @@ export const apiService = {
     getOrderHistory: async (email: string) => {
         const { data } = await apiClient.get('/orders/history', {
             params: { email }
-        });
-        return data;
-    },
-
-    validateCoupon: async (code: string) => {
-        const { data } = await apiClient.get<Coupon>('/coupons/validate', {
-            params: { code }
         });
         return data;
     },

@@ -43,6 +43,7 @@ export const CartItemList = () => {
                         </span>
                     </div>
                     <Button
+                        type="submit"
                         size="lg"
                         className="px-10 rounded-full font-bold shadow-lg bg-primary hover:scale-105 transition-transform"
                     >
