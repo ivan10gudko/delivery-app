@@ -29,40 +29,40 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     };
 
     return (
-        <Card className="overflow-hidden flex flex-col h-full hover:shadow-md transition-all border-zinc-200 pt-0">
-            <div className="aspect-4/3 bg-zinc-50 relative border-b flex items-center justify-center">
+        <Card className="overflow-hidden flex flex-col h-full hover:shadow-lg transition-all border-zinc-200 pt-0">
+            <div className="aspect-4/3 bg-zinc-100 relative overflow-hidden border-b">
                 {product.image ? (
                     <img
                         src={product.image}
                         alt={product.name}
-                        className="object-cover w-full h-full"
+                        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
                     />
                 ) : (
-                    <div className="text-zinc-300 relative w-full h-full flex items-center justify-center">
-                        <div className="absolute inset-0 border-[0.5px] border-zinc-200 rotate-30 translate-y-1/2 scale-150" />
-                        <div className="absolute inset-0 border-[0.5px] border-zinc-200 -rotate-30 -translate-y-1/2 scale-150" />
-                        <span className="text-xs uppercase font-bold z-10 bg-white px-2">
-                            No Image
-                        </span>
+                    <div className="w-full h-full flex items-center justify-center bg-zinc-50 text-zinc-400">
+                        <span className="text-xs uppercase font-bold tracking-tighter">No Image</span>
                     </div>
                 )}
             </div>
 
-            <CardContent className="p-4 grow">
-                <h3 className="font-medium text-base text-zinc-900">
+            <CardContent className="p-4 grow flex flex-col justify-between">
+                <h3 className="font-bold text-sm md:text-base text-zinc-900 line-clamp-2 min-h-10 md:min-h-12">
                     {product.name}
                 </h3>
             </CardContent>
 
-            <CardFooter className="p-4 pt-0 flex items-center justify-between">
-                <span className="text-lg font-bold">${product.price}</span>
+            <CardFooter className="p-4 pt-0 flex items-center justify-between mt-auto">
+                <div className="flex flex-col">
+                    <span className="text-[10px] text-muted-foreground uppercase font-medium">Price</span>
+                    <span className="text-lg font-black text-primary leading-tight">
+                        ${product.price.toFixed(2)}
+                    </span>
+                </div>
                 <Button
                     size="sm"
-                    variant="outline"
                     onClick={handleAddToCart}
-                    className="rounded-lg border-zinc-300 hover:bg-zinc-100"
+                    className="font-semibold px-4 shadow-sm hover:shadow-md transition-shadow"
                 >
-                    Add to Cart
+                    Add
                 </Button>
             </CardFooter>
         </Card>

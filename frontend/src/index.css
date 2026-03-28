@@ -5,6 +5,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+  :root {
+    --toast-bg: white;
+    --toast-border: var(--border);
+    --toast-text: var(--foreground);
+    --toast-success-text: var(--primary);
+    --toast-error-text: var(--color-destructive);
+  }
+
+  .dark {
+    --toast-bg: var(--background);
+  }
+}
+
+
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Inter Variable', sans-serif;
@@ -127,4 +142,12 @@
   html {
     @apply font-sans;
     }
+}
+
+
+[data-sonner-toast] {
+  font-family: var(--font-sans);
+  border-radius: 12px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
 }
