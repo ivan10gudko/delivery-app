@@ -30,7 +30,7 @@
 git clone [https://github.com/ivan10gudko/delivery-app.git](https://github.com/ivan10gudko/delivery-app.git)
 cd delivery-app
 ```
-Step 2: Backend Setup
+### Step 2: Backend Setup
 Navigate to the backend directory:
 
 ```bash
@@ -54,9 +54,8 @@ npx prisma db seed
 Start the development server:
 ```bash
 npm run dev
-Step 3: Frontend Setup
 ```
-
+### Step 3: Frontend Setup
 Open a new terminal and navigate to the frontend directory:
 ```bash
 cd frontend
