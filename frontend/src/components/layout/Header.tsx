@@ -1,17 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-    ShoppingCart,
-    Menu,
-} from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-    Sheet,
-    SheetContent,
-    SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import NavLinks from "./NawLinks";
-
+import ShopCartIcon from "./ShopCartIcon";
 
 export function Header() {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +13,6 @@ export function Header() {
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur ssupports-backdrop-filter:bg-background/60">
             <div className="container mx-auto flex h-16 items-center justify-end px-4">
-
                 <nav className="hidden md:flex items-center gap-6">
                     <NavLinks pathname={location.pathname} />
                 </nav>
@@ -33,7 +25,7 @@ export function Header() {
                         asChild
                     >
                         <Link to="/cart">
-                            <ShoppingCart className="size-5" />
+                            <ShopCartIcon />
                         </Link>
                     </Button>
 
@@ -56,7 +48,7 @@ export function Header() {
                                     onClick={() => setIsOpen(false)}
                                     pathname={location.pathname}
                                     className="text-lg font-semibold"
-                                    />
+                                />
                             </nav>
                         </SheetContent>
                     </Sheet>
