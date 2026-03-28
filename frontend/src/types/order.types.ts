@@ -1,5 +1,5 @@
 import type { Coupon } from "./coupon.types";
-import type { OrderProduct } from "./product.types";
+import type { OrderProduct, Product } from "./product.types";
 
 export interface CreateOrder {
     shopId: number;
@@ -20,6 +20,7 @@ export interface OrderHistory {
     totalPrice: number;
     createdAt: Date;
     coupon?: Omit<Coupon,'id'> | null;
+    shopId:number;
     items: OrderItem[];
 }
 
@@ -29,3 +30,14 @@ export interface Customer {
         phone: string;
         address: string;
     };
+
+export const mapOrderItemToProduct= (item:OrderItem):Product => {
+    return {
+        id:item.productId,
+        name: item.product.name,
+        price: item.product.price,
+        image: item.product.image,
+        shopId: item.product.shopId,
+        category: item.product.category,
+    }
+}

@@ -37,6 +37,7 @@ export interface OrderHistoryResponseDto {
     id: number;
     totalPrice: number;
     createdAt: Date;
+    shopId:number;
     coupon?: {
         code: string;
         discountPercent: number;

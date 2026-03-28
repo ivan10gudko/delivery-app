@@ -37,6 +37,7 @@ export const createOrder = async (dto: CreateOrderDto) => {
                 totalPrice: dto.totalPrice,
                 customerId: customer.id,
                 couponId: couponId,
+                shopId:dto.shopId,
                 items: {
                     create: dto.items.map(item => ({
                         productId: item.productId,

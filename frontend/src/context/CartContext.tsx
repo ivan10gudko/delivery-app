@@ -25,7 +25,8 @@ type CartAction =
     | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
     | { type: "CLEAR_CART" }
     | { type: "APPLY_COUPON"; payload: number }
-    | { type: "CLEAR_CART" };
+    | { type: "CLEAR_CART" }
+    | { type: "REORDER"; payload: { items: CartItem[]; shopId: number } };
 
 const initialState: CartState = {
     items: JSON.parse(localStorage.getItem("cart") || "[]"),
@@ -79,6 +80,14 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
         case "APPLY_COUPON": {
             return { ...state, discountPercent: action.payload };
+        }
+        case "REORDER": {
+            return {
+                ...state,
+                shopId: action.payload.shopId,
+                items: action.payload.items,
+                discountPercent: 0,
+            };
         }
         case "CLEAR_CART": {
             return {

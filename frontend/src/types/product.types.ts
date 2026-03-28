@@ -7,4 +7,4 @@ export interface Product{
     category: string;
 }
 
-export type OrderProduct = Omit<Product,'id'|'shopId'|'category'>
+export type OrderProduct = Omit<Product,'id'>
