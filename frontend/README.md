@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# Delivery App: Test task for ElifTech
+## level of accomplished: Advanced.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Demo:** [https://delivery-app-ugqq.onrender.com/shop](https://delivery-app-ugqq.onrender.com/shop)
 
-Currently, two official plugins are available:
+## Technical Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Frontend
+* React 18 with TypeScript
+* Vite as the build tool
+* Tailwind CSS for styling
+* Shadcn UI as the component library
+* TanStack Query (React Query) for server state management
+* React Hook Form + Zod for robust form validation
 
-## React Compiler
+### Backend
+* Node.js and Express.js
+* Prisma ORM for database communication
+* PostgreSQL as the relational database
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Installation and Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
+* Node.js (v18 or higher)
+* PostgreSQL installed and running
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Step 1: Clone the Repository
+```bash
+git clone [https://github.com/ivan10gudko/delivery-app.git](https://github.com/ivan10gudko/delivery-app.git)
+cd delivery-app
+```
+Step 2: Backend Setup
+Navigate to the backend directory:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd backend
+```
+Install dependencies:
+```bash
+npm install
+```
+Create a .env file and add your database credentials:
+```code
+DATABASE_URL="postgresql://user:password@localhost:5432/delivery_db"
+PORT=3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Sync the database and run the seed script:
+```bash
+npx prisma db push
+npx prisma db seed
+```
+Start the development server:
+```bash
+npm run dev
+Step 3: Frontend Setup
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Open a new terminal and navigate to the frontend directory:
+```bash
+cd frontend
+```
+Install dependencies:
+```bash
+npm install
+```
+Create a .env file for the API connection:
+```code
+VITE_API_URL=http://localhost:3000/api
+```
+Start the client:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
