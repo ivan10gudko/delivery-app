@@ -9,7 +9,15 @@ import { useEffect, useState } from 'react';
 const Shop = () => {
     const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
     const { state, dispatch } = useFilters();
-    const { data: shops, isLoading: isShopsLoading,isSuccess } = useShops();
+    
+    const {
+        data: shops,
+        isLoading: isShopsLoading,
+        isSuccess
+    } = useShops({
+        min: state.min ?? undefined,
+        max: state.max ?? undefined
+    });
     
     useEffect(() => {
         if (isSuccess && shops && shops.length > 0 && state.shopId === null) {

@@ -26,8 +26,8 @@ async function main() {
 
   console.log('Seeding shops...');
   const mcDonny = await prisma.shop.create({ data: { name: 'Mc Donny', rating: 4.8 } });
-  const cfk = await prisma.shop.create({ data: { name: 'CFK', rating: 4.2 } });
-  const pizzaHub = await prisma.shop.create({ data: { name: 'Pizza Hub', rating: 4.5 } });
+  const cfk = await prisma.shop.create({ data: { name: 'CFK', rating: 3.8 } });
+  const pizzaHub = await prisma.shop.create({ data: { name: 'Pizza Hub', rating: 2.5 } });
   const sushiMaster = await prisma.shop.create({ data: { name: 'Sushi Master', rating: 4.9 } });
 
   console.log('Seeding coupons...');
