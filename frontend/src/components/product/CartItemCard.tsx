@@ -52,6 +52,7 @@ const CartItemCard = ({ item }: CartItemCardProps) => {
                         <Button
                             variant="ghost"
                             size="icon"
+                            type="button"
                             className="h-7 w-7 sm:h-8 sm:w-8 hover:bg-background"
                             onClick={() => updateQty(item.quantity - 1)}
                             disabled={item.quantity <= 1}
@@ -66,6 +67,7 @@ const CartItemCard = ({ item }: CartItemCardProps) => {
                         <Button
                             variant="ghost"
                             size="icon"
+                            type="button"
                             className="h-7 w-7 sm:h-8 sm:w-8 hover:bg-background"
                             onClick={() => updateQty(item.quantity + 1)}
                         >
