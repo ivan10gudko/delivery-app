@@ -16,18 +16,22 @@ interface CartState {
     items: CartItem[];
     totalPrice: number;
     shopId: number | null;
+    discountPercent: number;
 }
 
 type CartAction =
     | { type: "ADD_ITEM"; payload: Product }
     | { type: "REMOVE_ITEM"; payload: number } // id
     | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
+    | { type: "CLEAR_CART" }
+    | { type: "APPLY_COUPON"; payload: number }
     | { type: "CLEAR_CART" };
 
 const initialState: CartState = {
     items: JSON.parse(localStorage.getItem("cart") || "[]"),
     totalPrice: 0,
     shopId: null,
+    discountPercent: 0,
 };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -45,10 +49,10 @@ function cartReducer(state: CartState, action: CartAction): CartState {
             );
             const newItems = existingItem
                 ? state.items.map((item) =>
-                        item.id === newItem.id
-                            ? { ...item, quantity: item.quantity + 1 }
-                            : item,
-                    )
+                      item.id === newItem.id
+                          ? { ...item, quantity: item.quantity + 1 }
+                          : item,
+                  )
                 : [...state.items, { ...newItem, quantity: 1 }];
 
             return {
@@ -65,15 +69,25 @@ function cartReducer(state: CartState, action: CartAction): CartState {
             newItems = state.items.map((item) =>
                 item.id === action.payload.id
                     ? {
-                            ...item,
-                            quantity: Math.max(1, action.payload.quantity),
-                        }
+                          ...item,
+                          quantity: Math.max(1, action.payload.quantity),
+                      }
                     : item,
             );
             return { ...state, items: newItems };
         }
+
+        case "APPLY_COUPON": {
+            return { ...state, discountPercent: action.payload };
+        }
         case "CLEAR_CART": {
-            return { ...state, items: [], totalPrice: 0, shopId: null };
+            return {
+                ...state,
+                items: [],
+                totalPrice: 0,
+                shopId: null,
+                discountPercent: 0,
+            };
         }
 
         default:
@@ -83,9 +97,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 const CartContext = createContext<
     | {
-        state: CartState;
-        dispatch: React.Dispatch<CartAction>;
-    }
+          state: CartState;
+          dispatch: React.Dispatch<CartAction>;
+      }
     | undefined
 >(undefined);
 

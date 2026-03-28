@@ -1,69 +1,54 @@
-import { Separator } from '@/components/ui/separator';
-import { useCart } from '@/context/CartContext';
-import { Trash2, Plus, Minus } from 'lucide-react';
-import { Button } from '../ui/button';
+import { useCart } from "@/context/CartContext";
+import { Button } from "../ui/button";
+import CartItemCard from "../product/CartItemCard";
 
 export const CartItemList = () => {
-    const { state, dispatch } = useCart();
+    const { state } = useCart();
+
+    const discountAmount = (state.totalPrice * state.discountPercent) / 100;
+    const finalPrice = state.totalPrice - discountAmount;
 
     return (
-        <div className="space-y-6">
-            <h2 className="text-xl font-semibold border-b pb-2">Order Summary</h2>
-            
-            <div className="max-h-75 overflow-y-auto pr-2 space-y-4">
+        <div className="flex flex-col h-full">
+            <h2 className="text-xl font-semibold border-b pb-4 mb-4">
+                Order Summary
+            </h2>
+
+            <div className="grow overflow-y-auto pr-2 space-y-4 mb-6">
                 {state.items.map((item) => (
-                    <div key={item.id} className="flex gap-4 border p-3 rounded-lg bg-background shadow-sm">
-                        <div className="w-24 h-24 bg-muted rounded-md overflow-hidden shrink-0">
-                            <img src={item.image ?? '/placeholder.svg'} alt={item.name} className="object-cover w-full h-full" />
-                        </div>
-                        
-                        <div className="grow flex flex-col justify-between">
-                            <div className="flex justify-between items-start">
-                                <h4 className="font-bold text-base">{item.name}</h4>
-                                <Button 
-                                    variant="ghost" 
-                                    size="icon" 
-                                    className="h-8 w-8 text-destructive"
-                                    onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: item.id })}
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
-                            </div>
-                            
-                            <div className="flex justify-between items-center">
-                                <p className="font-semibold text-primary">${item.price}</p>
-                                
-                                <div className="flex items-center gap-2 border rounded-md p-1">
-                                    <Button
-                                        variant="ghost" size="icon" className="h-7 w-7"
-                                        onClick={() => dispatch({ type: 'UPDATE_QUANTITY', payload: { id: item.id, quantity: item.quantity - 1 } })}
-                                    >
-                                        <Minus className="w-3 h-3" />
-                                    </Button>
-                                    <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                                    <Button
-                                        variant="ghost" size="icon" className="h-7 w-7"
-                                        onClick={() => dispatch({ type: 'UPDATE_QUANTITY', payload: { id: item.id, quantity: item.quantity + 1 } })}
-                                    >
-                                        <Plus className="w-3 h-3" />
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <CartItemCard key={item.id} item={item} />
                 ))}
             </div>
 
-            <Separator />
-
-            <div className="flex justify-between items-center pt-4">
-                <div className="flex flex-col">
-                    <span className="text-sm text-muted-foreground">Total amount:</span>
-                    <span className="text-3xl font-bold text-primary">${state.totalPrice.toFixed(2)}</span>
+            <div className="mt-auto pt-4 border-t space-y-3">
+                <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Subtotal:</span>
+                    <span>${state.totalPrice.toFixed(2)}</span>
                 </div>
-                <Button size="lg" className="px-12 rounded-full font-bold shadow-md hover:scale-105 transition-transform">
-                    SUBMIT ORDER
-                </Button>
+
+                {state.discountPercent > 0 && (
+                    <div className="flex justify-between text-sm font-medium text-primary">
+                        <span>Discount ({state.discountPercent}%):</span>
+                        <span>-${discountAmount.toFixed(2)}</span>
+                    </div>
+                )}
+
+                <div className="flex justify-between items-end pt-2">
+                    <div className="flex flex-col">
+                        <span className="text-sm font-bold uppercase tracking-wider">
+                            Total:
+                        </span>
+                        <span className="text-4xl font-black text-primary leading-none">
+                            ${finalPrice.toFixed(2)}
+                        </span>
+                    </div>
+                    <Button
+                        size="lg"
+                        className="px-10 rounded-full font-bold shadow-lg bg-primary hover:scale-105 transition-transform"
+                    >
+                        SUBMIT ORDER
+                    </Button>
+                </div>
             </div>
         </div>
     );
