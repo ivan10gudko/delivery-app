@@ -33,7 +33,7 @@ export const CartItemList = () => {
                     </div>
                 )}
 
-                <div className="flex justify-between items-end pt-2">
+                <div className="flex justify-between items-end pt-2 flex-wrap gap-3">
                     <div className="flex flex-col">
                         <span className="text-sm font-bold uppercase tracking-wider">
                             Total:

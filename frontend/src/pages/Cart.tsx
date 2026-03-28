@@ -44,7 +44,7 @@ const Cart = () => {
     console.log("Validation Errors:", errors);
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-2 md:px-4 py-8">
             {state.items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center min-h-100 border-2 border-dashed rounded-xl">
                     <p className="text-xl text-muted-foreground">
@@ -54,7 +54,7 @@ const Cart = () => {
             ) : (
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="container mx-auto px-4 py-8"
+                    className="container mx-auto md:px-4 py-8"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                         <div className="bg-card border rounded-xl p-6 shadow-sm flex flex-col">
